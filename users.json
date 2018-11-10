@@ -1,0 +1,28 @@
+{
+	"users": [
+		{
+			"id": 1,
+			"firstName": "qwe",
+			"lastName": "qwe",
+			"email": "qwe",
+			"number": "123",
+			"username": "qwe",
+			"password": "qwe",
+			"address": "qwe",
+			"sellItems": [],
+			"buyItems": []
+		},
+		{
+			"id": 2,
+			"firstName": "asd",
+			"lastName": "asd",
+			"email": "asd",
+			"number": "123",
+			"username": "asd",
+			"password": "asd",
+			"address": "asd",
+			"sellItems": [],
+			"buyItems": []
+		}
+	]
+}
