@@ -10,8 +10,8 @@ router.post('/', function(req, res) {
 	let check = false;
 	const registerInput= {
 		usernameL : req.body.usernameL,
-        password : req.body.passwordL,
-    }
+        	passwordL : req.body.passwordL,
+    	}
 
     console.log(registerInput);
     for(let i = 0; i < users.length; i++) {
