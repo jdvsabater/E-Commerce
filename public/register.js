@@ -27,7 +27,7 @@
           }
           else{
             alert("Email or Username already used!");
-            
+            window.location.href = "/";  
           }
          
     		  
