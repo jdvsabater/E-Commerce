@@ -14,7 +14,8 @@
             window.location.href = "/home";  
           }
           else{
-						alert("Wrong Username or Password!");  
+	    alert("Wrong Username or Password!");  
+            window.location.href = "/";  
 						
           }
       	})
