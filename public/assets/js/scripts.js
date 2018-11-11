@@ -7,11 +7,7 @@ function isNumber(event){
 }
 $(document).ready(function (){
     validate();
-    $('#inputName, #inputEmail, #inputTel').change(validate);
-});
-$(document).ready(function (){
-    validate();
-    $('#form-first-name, #form-last-name, #form-email,#form-username,#form-password,#form-number,#form-address').change(validate);
+    $('#form-first-name, #form-last-name, #form-email,#form-username,#form-password,#form-number,#form-address').keyup(validate);
 });
 
 function validate(){
@@ -30,7 +26,8 @@ function validate(){
 }
 $(document).ready(function (){
     validate1();
-    $('#form-usernameL, #form-passwordL').change(validate1);
+    $('#form-usernameL, #form-passwordL').keyup(validate1);
+    
 });
 
 function validate1(){
@@ -43,6 +40,7 @@ function validate1(){
         $("#login").prop("disabled", true);
     }
 }
+
 jQuery(document).ready(function() {
 	
     /*

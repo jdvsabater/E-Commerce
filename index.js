@@ -27,7 +27,7 @@ app.set('view engine', 'pug');
 
 app.use((req,res,next) =>{
 	req.viewModel ={
-		title : 'S-Commerce'
+		title : 'Lexus E-Commerce'
 	};
 	next()
 });

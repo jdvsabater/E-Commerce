@@ -11,12 +11,11 @@
    		.then(function(res) {
           if(res.data === true){
             alert("Login Succesful!");
-            window.location.href = "/home";  
+            window.location.href = '/home';  
           }
           else{
-	    alert("Wrong Username or Password!");  
-            window.location.href = "/";  
-						
+						alert("Wrong Username or Password!");  
+						window.location.href = '/';
           }
       	})
       	.catch(function(err) {
