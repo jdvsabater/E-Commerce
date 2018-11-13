@@ -1,0 +1,31 @@
+{
+	"productPost": [
+		{
+			"userId": "1",
+			"productId": 1,
+			"productName": "test",
+			"description": "test",
+			"type": "Books",
+			"quantity": "123",
+			"price": "50"
+		},
+		{
+			"userId": "1",
+			"productId": 2,
+			"productName": "test",
+			"description": "test",
+			"type": "Books",
+			"quantity": "123",
+			"price": "50"
+		},
+		{
+			"userId": "1",
+			"productId": 3,
+			"productName": "555555",
+			"description": "55555555555",
+			"type": "Books",
+			"quantity": "5555",
+			"price": "555555555"
+		}
+	]
+}
