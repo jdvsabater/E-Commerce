@@ -41,17 +41,44 @@ app.use(session({
   }));
   //----------------------------------------
 
-router.get('/', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-
-	console.log(titleModel);
-	res.render('login.pug',titleModel);
+router.use(methodOverride('_method'));
+router.post('/', (req,res) => {
+    let productId = req.body.productId;
+    const prod = product.get('productPost');
+    console.log(productId);
+    let productItem =prod.filter(function(prods) {
+        return Number(prods.productId) === Number(productId);
+    });
+    let prodss ={
+        productItem: productItem
+    }
+    console.log(prodss);
+    res.render('edit.pug',prodss);
 });
-router.get('/home', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-	console.log('home route');
-	console.log(titleModel);
-	res.render('homepage.pug',titleModel);
+
+router.put('/:id', (req,res) => {
+    let productId = req.params.id;
+    const prod = product.get('productPost');
+    console.log(prod);
+    console.log(req.body.prodName);
+    console.log('length '+prod.length);
+    let productItem ={};
+    for(let i = 0; i < prod.length;i++){
+        
+        if (Number(prod[i].productId) === Number(productId)){
+            console.log(prod[i].productName);
+            prod[i].productName=req.body.prodName;
+            prod[i].description=req.body.prodDescription;
+            prod[i].quantity=req.body.prodQuantity;
+            prod[i].price=req.body.prodPrice;
+            prod[i].type=req.body.prodType;
+        }
+    }
+
+    console.log(prod);
+    product.set('productPost', prod);
+    req.flash('success',"Product Updated Succesfully!")
+    res.redirect('/myProdServ');
 });
 
 

@@ -1,0 +1,28 @@
+extends layout.pug
+block content
+    if sampleL == 0
+        h1 No orders yet.
+    else
+        h1 ORDER LIST
+        div(class="container")
+        table.table
+            tr
+                th Order ID
+                th Name
+                th Description
+                th Quantity
+                th Status
+                th Seller
+                th Price
+                th Shipping Fee
+                each val, index in sample
+                    tr 
+                        td=sample[index].orderId
+                        td=sample[index].name
+                        td=sample[index].description
+                        td=sample[index].quantity
+                        td=sample[index].status
+                        td=sample[index].seller
+                        td=sample[index].price
+                        td=sample[index].shippingfee
+                    

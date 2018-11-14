@@ -1,3 +1,29 @@
+$('[name=price]').keypress(function(e){ 
+    if (this.value.length == 0 && e.which == 48 ){
+       return false;
+    }
+ });
+
+ $('[name=quantity]').keypress(function(e){ 
+    if (this.value.length == 0 && e.which == 48 ){
+       return false;
+    }
+ });
+ $('[name=inputQuantity]').keypress(function(e){ 
+    if (this.value.length == 0 && e.which == 48 ){
+       return false;
+    }
+ });
+ $('[name=prodQuantity]').keypress(function(e){ 
+    if (this.value.length == 0 && e.which == 48 ){
+       return false;
+    }
+ });
+ $('[name=prodPrice]').keypress(function(e){ 
+    if (this.value.length == 0 && e.which == 48 ){
+       return false;
+    }
+ });
 function isNumber(event){
     var keycode = event.keyCode;
     if(keycode >47 && keycode< 58){
@@ -26,14 +52,14 @@ function validate(){
 }
 $(document).ready(function (){
     validate1();
-    $('#form-usernameL, #form-passwordL').keyup(validate1);
+    $('#usernameL, #passwordL').keyup(validate1);
     
 });
 
 function validate1(){
     if (
-        $('#form-usernameL').val().length  >   0   &&
-        $('#form-passwordL').val().length   >   0 ) {
+        $('#usernameL').val().length  >   0   &&
+        $('#passwordL').val().length   >   0 ) {
         $("#login").prop("disabled", false);
     }
     else {

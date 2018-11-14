@@ -3,9 +3,8 @@ const app = express();
 const router = express.Router(); //eslint-disable-line
 const SimpleJsonStore = require('simple-json-store');
 const bodyParser = require('body-parser');
-const methodOverride =require('method-override');
+
 const store = new SimpleJsonStore('./users.json', { users: [] });
-const product = new SimpleJsonStore('./product.json', { productPost: []});
 const service = new SimpleJsonStore('./service.json', { servicePost: []});
 const expressValidator = require('express-validator')
 const session = require('express-session');
@@ -40,20 +39,35 @@ app.use(session({
     }
   }));
   //----------------------------------------
-
-router.get('/', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-
-	console.log(titleModel);
-	res.render('login.pug',titleModel);
-});
-router.get('/home', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-	console.log('home route');
-	console.log(titleModel);
-	res.render('homepage.pug',titleModel);
+router.get('/', (req,res) => {
+    let titleModel = req.titleModel;
+    var getID = titleModel.getID;
+    console.log(getID);
+    res.render('servicePage.pug', titleModel);
 });
 
 
+router.post('/:id', (req, res) => {
+    let titleModel = req.titleModel;
+    const typ = req.body.tos;
+    const sers = service.get('servicePost');
+    const idd = req.params.id;
+    console.log(idd);
+   
+    sers.push({
+        userId: idd,
+        serviceId: sers.length > 0 ? sers[sers.length-1].serviceId +1: 1, 
+        service: req.body.nameofService,
+        description: req.body.description,
+        type: typ,
+        price: req.body.price
+    });
+    
+    service.set('servicePost', sers);
+    req.flash('success',"Service Added Successfully!")
+    res.redirect('/service');
+    
+    
+});
 
 module.exports = router;

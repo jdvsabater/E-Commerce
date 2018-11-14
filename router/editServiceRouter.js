@@ -5,7 +5,6 @@ const SimpleJsonStore = require('simple-json-store');
 const bodyParser = require('body-parser');
 const methodOverride =require('method-override');
 const store = new SimpleJsonStore('./users.json', { users: [] });
-const product = new SimpleJsonStore('./product.json', { productPost: []});
 const service = new SimpleJsonStore('./service.json', { servicePost: []});
 const expressValidator = require('express-validator')
 const session = require('express-session');
@@ -41,17 +40,43 @@ app.use(session({
   }));
   //----------------------------------------
 
-router.get('/', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-
-	console.log(titleModel);
-	res.render('login.pug',titleModel);
+router.use(methodOverride('_method'));
+router.post('/', (req,res) => {
+    let serviceId = req.body.serviceId;
+    const serv = service.get('servicePost');
+    console.log(serviceId);
+    let serviceItem =serv.filter(function(servs) {
+        return Number(servs.serviceId) === Number(serviceId);
+    });
+    let servss ={
+        serviceItem: serviceItem
+    }
+    console.log(servss);
+    res.render('editServ.pug',servss);
 });
-router.get('/home', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-	console.log('home route');
-	console.log(titleModel);
-	res.render('homepage.pug',titleModel);
+
+router.put('/:id', (req,res) => {
+    let serviceId = req.params.id;
+    const serv = service.get('servicePost');
+    console.log(serv);
+    console.log(req.body.serviceName);
+    console.log('length '+serv.length);
+    let productItem ={};
+    for(let i = 0; i < serv.length;i++){
+        
+        if (Number(serv[i].serviceId) === Number(serviceId)){
+            console.log(serv[i].serviceName);
+            serv[i].service=req.body.serviceName;
+            serv[i].description=req.body.description;
+            serv[i].price=req.body.price;
+            serv[i].type=req.body.servType;
+        }
+    }
+
+    console.log(serv);
+    service.set('servicePost', serv);
+    req.flash('success',"Service Updated Succesfully!")
+    res.redirect('/myProdServ');
 });
 
 

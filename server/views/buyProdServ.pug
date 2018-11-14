@@ -1,0 +1,33 @@
+extends layout.pug
+block content
+
+    h1 #{samp.title} #{samp.getID}
+    div(class="container")
+    if sampL == 0
+        h4 NO Entries
+    else
+        table.table
+            tr
+                th Product Name
+                th Description
+                th Product Type
+                th Product Prices
+                th Product Quantity
+                th Shipping Fee
+                each val, index in sample
+                    tr 
+                        td=sample[index].productName
+                        td=sample[index].description
+                        td=sample[index].type
+                        td=sample[index].price
+                        td=sample[index].quantity
+                        td=sample[index].shippingfee
+                        td
+                            //form(action='/buyProduct/prod/'+prod[index].productId+'?_method=delete' method="POST")
+                                button Order
+                            form(action='/orderProduct' method='post')    
+                                input.hidden(type="hidden" value=sample[index].productId name='productId')
+                                input.hidden(type="hidden" value=sample[index].userId name='userId')
+                                    
+                                button.btn(type="submit") Order
+                        

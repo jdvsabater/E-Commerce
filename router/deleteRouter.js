@@ -40,20 +40,42 @@ app.use(session({
     }
   }));
   //----------------------------------------
+router.use(methodOverride('_method'));
+router.delete('/prod/:id', (req, res) => {
+    console.log('pmasok');
+    const prod = product.get('productPost');
+    const id = req.params.id;
+    
+    console.log(id);
+    console.log(prod);
+    var newProd = prod.filter( function(prods) {
+      return Number(prods.productId) !== Number(id);
+    });
 
-router.get('/', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
+    product.set('productPost', newProd);
+    console.log(newProd);
+    req.flash('success',"Product Delete Successfull!")
+    res.redirect('/myProdServ');
 
-	console.log(titleModel);
-	res.render('login.pug',titleModel);
 });
-router.get('/home', function getIndexPage(req, res) {
-	let titleModel = req.titleModel;
-	console.log('home route');
-	console.log(titleModel);
-	res.render('homepage.pug',titleModel);
+router.use(methodOverride('_method'));
+router.delete('/serv/:id', (req, res) => {
+    console.log('pmasok service');
+    const serv = service.get('servicePost');
+    const id = req.params.id;
+    
+    console.log(id);
+    console.log(serv);
+    var newServ = serv.filter( function(servs) {
+      return Number(servs.serviceId) !== Number(id);
+    });
+    
+    service.set('servicePost', newServ);
+    req.flash('success',"Service Delete Successfull!")
+    res.redirect('/myProdServ');
+
+    
+    
 });
-
-
 
 module.exports = router;

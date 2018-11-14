@@ -5,24 +5,30 @@
 			"firstName": "qwe",
 			"lastName": "qwe",
 			"email": "qwe",
-			"number": "123",
+			"number": "09123123",
 			"username": "qwe",
 			"password": "qwe",
-			"address": "qwe",
-			"sellItems": [],
-			"buyItems": []
+			"address": "qwe"
 		},
 		{
 			"id": 2,
+			"firstName": "junie",
+			"lastName": "rante",
+			"email": "junierante@gmail.com",
+			"number": "09123123",
+			"username": "junie",
+			"password": "rante",
+			"address": "asdasd\n"
+		},
+		{
+			"id": 3,
 			"firstName": "asd",
 			"lastName": "asd",
 			"email": "asd",
-			"number": "123",
+			"number": "0909",
 			"username": "asd",
 			"password": "asd",
-			"address": "asd",
-			"sellItems": [],
-			"buyItems": []
+			"address": "asd"
 		}
 	]
 }
