@@ -3,7 +3,7 @@ const router = express.Router();
 const app = express();
 const SimpleJsonStore = require('simple-json-store');
 
-const store = new SimpleJsonStore('./users.json');
+const store = new SimpleJsonStore('./users.json',{users:[]});
 
 var getID = [];
 

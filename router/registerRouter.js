@@ -4,7 +4,37 @@ const SimpleJsonStore = require('simple-json-store',);
 // Initializes the data-2.json file with notes as its initial value if empty
 const store = new SimpleJsonStore('./users.json',{ users: [] });
 const axios = require('axios');
+const expressValidator = require('express-validator')
+const session =require('express-session');
+const flash = require('connect-flash');
+const app= express();
+//------------validate
+app.use(session({
+    secret: "hello",
+    resave: true
+  }))
+  app.use(require('connect-flash')());
+  app.use(function(req, res, next){
+     res.locals.messages = require('express-messages')(req, res);
+     next();
+  });
+  app.use(expressValidator({
+    errorFormatter: function(param, msg , value){
+      var namespace = param.splice('.'),
+      root = namespace.shift(),
+      formParam = root;
+      while(namespace.length){
+        formParam += '[' + namespace.shift() + ']';
+  
+      }return {
+        param: formParam,
+        msg: msg,
+        value:value
+      };
+    }
+  }));
 
+  //----------------------------------------
 router.post('/', function(req, res) {
 	const users = store.get('users');
 	let check = false;
@@ -50,7 +80,12 @@ router.post('/', function(req, res) {
 	}else{
 		check= false;
 	}
-	res.send(check);
+	if(checkdb==true){
+		req.flash('danger',"Username or Email already Used!");
+	}else{
+		req.flash('success',"Account succesfully created! Login Now!");
+	}
+	res.redirect('/');
 });
 
 

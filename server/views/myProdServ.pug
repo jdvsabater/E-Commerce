@@ -1,60 +1,35 @@
 extends layout.pug
 block content
-    
-    if prodL == 0 && servL == 0
-        h4 No Products & Services posted yet
-    else
-            div(class="container")
-            
-            if prodL == 0
-                h4 No Products posted yet
-            else
-                h1 My Products
-                table.table
-                    tr
-                        th Name
-                        th Description
-                        th Product Type
-                        th Product Price
-                        th Quantity Available
-                        th(colspan='2') Action
-                        each val, index in prod
-                            tr
-                                td= prod[index].productName 
-                                td= prod[index].description 
-                                td= prod[index].type
-                                td= prod[index].quantity
-                                td= prod[index].price 
-                                td
-                                    form(action='/delete/prod/'+prod[index].productId+'?_method=DELETE' method='post')
-                                        button.btn(role='button' type='submit') Delete
-                                td
-                                    form(action='/updateProd' method='post')
-                                        input.hidden(type="hidden" value=prod[index].productId name='productId')
-                                        button.btn(role='button' type='submit') Edit
-            div(class="container")
 
-            if servL == 0
-                h4 No Services Posted yet
-            else
-                h1 My Services
-                table.table
+    div(class="container")
+    
+    if prodL == 0
+        h4 No Products posted yet
+    else
+        h1 My Products
+        table.table
+            tr
+                th Name
+                th Description
+                th Product Type
+                th Product Price
+                th Quantity Available
+                th Shipping Fee
+                th(colspan='2') Action
+                each val, index in prod
                     tr
-                        th Name
-                        th Description
-                        th Service Type
-                        th Service Price
-                        th(colspan='2') Action
-                        each val, index in serv
-                            tr
-                                td= serv[index].service 
-                                td= serv[index].description 
-                                td= serv[index].type 
-                                td= serv[index].price 
-                                td
-                                    form(action='/delete/serv/'+serv[index].serviceId+'?_method=DELETE' method='post')
-                                        button.btn(role='button' type='submit') Delete
-                                td
-                                    form(action='/updateServ' method='post')
-                                        input.hidden(type="hidden" value=serv[index].serviceId name='serviceId')
-                                        button.btn(role='button' type='submit') Edit
+                        td= prod[index].productName 
+                        td= prod[index].description 
+                        td= prod[index].type
+                        td= prod[index].price 
+                        td= prod[index].quantity
+                        td= prod[index].shippingfee
+                        
+                        td
+                            form(action='/delete/prod/'+prod[index].productId+'?_method=DELETE' method='post')
+                                button.btn(role='button' type='submit') Delete
+                        td
+                            form(action='/updateProd' method='post')
+                                input.hidden(type="hidden" value=prod[index].productId name='productId')
+                                button.btn(role='button' type='submit') Edit
+    

@@ -46,33 +46,48 @@ router.use(methodOverride('_method'));
 router.put('/' ,(req, res) => {
     var inputQuantity = Number(req.body.inputQuantity);
     var quantity = Number(req.body.quantity);
-
+    const sellerId = req.body.sellerId; 
+    const id = req.body.productId;
+    const stor = store.get('users');
       console.log(inputQuantity);
       console.log(quantity);
         if(inputQuantity > quantity)
         {
             console.log(quantity - inputQuantity);
+            req.flash('danger',"Input is Higher that quantity of Product!");
             res.redirect('/buyProdServ'); 
         }
         else
         {
-            const id = req.body.productId;
+              
+            
             const products = product.get('productPost');
             const trans = transact.get('tHistory');
             quantity -= inputQuantity;
             if(quantity === 0)
             {
                  console.log(id);
-                  var newProducts = products.filter(function(prods){
+                  /*var newProducts = products.filter(function(prods){
 
-                  return Number(prods.productId) !== Number(id);
+                    return Number(prods.productId) === Number(id);
                   });
+                  */
+                  for(let i = 0; i < products.length; i++){
+                    if(Number(products[i].productId) == Number(id)){
+                      products[i].quantity = quantity;
+                      product.set('productPost',products);
+                      console.log(products[i].productId);
+                      console.log(id);
+                      req.flash('success', "Product has been bought");
+                      res.redirect('/buyProdServ');
+                    }
+                  }
                   console.log("WORKWORKWORK");
 
-                    
-                       product.set('productPost', newProducts);
-                       req.flash('success', "Product has been bought");
-                       res.redirect('/buyProdServ');
+
+                       //product.set('productPost', newProducts);
+                      // req.flash('success', "Product has been bought");
+                       //res.redirect('/buyProdServ');
             }
             else
             {
@@ -94,15 +109,21 @@ router.put('/' ,(req, res) => {
             }
             let titleModel = req.titleModel;
             trans.push({
-              userId: titleModel.getID,
+              buyerId: titleModel.getID,
               orderId: trans.length > 0 ? trans[trans.length -1].orderId + 1: 1,
+              productId: id,
+              sellerId: sellerId,
               name: req.body.productName,
               description: req.body.description,
               quantity: req.body.inputQuantity,
-              status: "Pending",
+              status: "Pending..",
               price: req.body.price,
               shippingfee: req.body.shippingfee,
-              seller: req.body.sellerName
+              seller: req.body.sellerName,
+              categoryName: "Product",
+              buyerName: stor[(Number(titleModel.getID) - 1)].firstName + " " + stor[(Number(titleModel.getID) - 1)].lastName
+
+
             });
                transact.set('tHistory',trans);
                

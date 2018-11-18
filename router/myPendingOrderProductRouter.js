@@ -12,18 +12,18 @@ router.get('/',(req,res) =>{
     console.log(titleModel.getID);
     console.log(trans);
     const sample = trans.filter(function(transs){
-        return (Number(transs.buyerId) === Number(req.titleModel.getID) && (transs.categoryName === 'Product'));
+        return Number(transs.sellerId) === Number(req.titleModel.getID) && transs.categoryName == "Product";
     });
+
+    
     let sampleL=sample.length;
+    console.log(sampleL);
     const orderList ={
         samp:titleModel,
         sample:sample,
         sampleL: sampleL
     }
-    res.render('myOrderList.pug',orderList )
+    res.render('myPendingOrderProduct.pug',orderList )
 });
-
-
-
 
 module.exports = router;

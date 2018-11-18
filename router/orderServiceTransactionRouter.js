@@ -3,9 +3,12 @@ const app = express();
 const router = express.Router(); //eslint-disable-line
 const SimpleJsonStore = require('simple-json-store');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
-const store = new SimpleJsonStore('./users.json', { users: [] });
-const product = new SimpleJsonStore('./product.json', { productPost: []});
+const store = new SimpleJsonStore('./users.json');
+const product = new SimpleJsonStore('./product.json');
+const service = new SimpleJsonStore('./service.json');
+const transact = new SimpleJsonStore('./transactionHistory.json');
 const expressValidator = require('express-validator')
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -39,40 +42,31 @@ app.use(session({
     }
   }));
   //----------------------------------------
-router.get('/', (req,res) => {
+router.post('/' ,(req, res) => {
+
+    const sellerId = req.body.sellerId; 
+    const id = req.body.serviceId;
+    const stor = store.get('users');
+    const trans = transact.get('tHistory');
     let titleModel = req.titleModel;
-    var getID = titleModel.getID;
-    console.log(getID);
-    res.render('productPage.pug', titleModel);
-});
+    trans.push({
+    buyerId: titleModel.getID,
+    orderId: trans.length > 0 ? trans[trans.length -1].orderId + 1: 1,
+    serviceId: id,
+    sellerId: sellerId,
+    name: req.body.serviceName,
+    description: req.body.description,
+    status: "Pending..",
+    price: req.body.price,
+    seller: req.body.sellerName,
+    categoryName: "Service",
+    buyerName: stor[(Number(titleModel.getID) - 1)].firstName + " " + stor[(Number(titleModel.getID) - 1)].lastName
 
-
-router.post('/:id', (req, res) => {
-    let titleModel = req.titleModel;
-    const typ = req.body.tos;
-    const prod = product.get('productPost');
-    const idd = req.params.id;
-    console.log(idd);
-
-    prod.push({
-      
-        categoryName: "Product",
-        userId: idd,
-        productId: prod.length > 0 ? prod[prod.length-1].productId+1 : 1, 
-        productName: req.body.nameofService,
-        description: req.body.description,
-        quantity: req.body.quantity,
-        type: typ,
-        shippingfee: req.body.shippingfee,
-        price: req.body.price
     });
-    
-    product.set('productPost', prod);
-    req.flash('success',"Product Added Successfully!")
-    res.redirect('/product');
-
-    
-    
+    transact.set('tHistory',trans);
+    req.flash('success', "Services has been bought");
+    res.redirect('/buyService');
+        
 });
 
 module.exports = router;

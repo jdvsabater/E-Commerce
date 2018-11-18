@@ -1,3 +1,14 @@
 {
-	"servicePost": []
+	"servicePost": [
+		{
+			"categoryName": "Service",
+			"userId": "7",
+			"serviceId": 1,
+			"serviceName": "C Tutorial",
+			"description": "C",
+			"type": "Tutorial",
+			"price": "350",
+			"mobilenumber": "00000000000"
+		}
+	]
 }

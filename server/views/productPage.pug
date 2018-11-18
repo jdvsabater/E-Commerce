@@ -15,9 +15,11 @@ block content
                     option(value="Clothes" ) Clothes
                     option(value="Gadgets") Gadgets
         .form-group
-            input.form-control(type="text" name="quantity" onkeypress="return isNumber(event)" placeholder='Quantity..')
+            input.form-control(type="text" name="quantity" onkeypress="return isNumber(event)" placeholder='Quantity..' required)
         .form-group
-            input.form-control#deposit(type="text" name="price" onkeypress="return isNumber(event)" placeholder='Price..')       
+            input.form-control(type="text" name="shippingfee" onkeypress="return isNumber(event)" placeholder='Shipping Fee..' required)
+        .form-group
+            input.form-control#deposit(type="text" name="price" onkeypress="return isNumber(event)" placeholder='Price..' required)       
         
                         
         .form-group

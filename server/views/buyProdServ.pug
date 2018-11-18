@@ -1,19 +1,24 @@
 extends layout.pug
 block content
 
-    h1 #{samp.title} #{samp.getID}
+
     div(class="container")
     if sampL == 0
-        h4 NO Entries
+        h4 Products 
+        h2 No Entries..
     else
-        table.table
+        h4 Products  
+        table(id='myTable' class="table table-striped table-bordered" style="width:100%")
+            thead
             tr
                 th Product Name
                 th Description
                 th Product Type
-                th Product Prices
+                th Product Price
                 th Product Quantity
                 th Shipping Fee
+                th
+            tbody
                 each val, index in sample
                     tr 
                         td=sample[index].productName
@@ -30,4 +35,4 @@ block content
                                 input.hidden(type="hidden" value=sample[index].userId name='userId')
                                     
                                 button.btn(type="submit") Order
-                        
+    

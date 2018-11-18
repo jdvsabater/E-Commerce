@@ -19,9 +19,13 @@ block content
                 label Edit Quantity
                 input.form-control(type="text" name="prodQuantity" value=productItem[0].quantity onkeypress="return isNumber(event)")
             .form-group
+                label Shipping Fee
+                input.form-control#deposit(type="text" name="shipFee" value=productItem[0].shippingfee onkeypress="return isNumber(event)")           
+            .form-group
                 label Edit Price
                 input.form-control#deposit(type="text" name="prodPrice" value=productItem[0].price onkeypress="return isNumber(event)")       
             
                             
             .form-group
             button.btn.btn-primary(type="submit") Confirm
+            

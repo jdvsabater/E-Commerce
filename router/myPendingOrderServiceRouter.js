@@ -3,9 +3,12 @@ const app = express();
 const router = express.Router(); //eslint-disable-line
 const SimpleJsonStore = require('simple-json-store');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
-const store = new SimpleJsonStore('./users.json', { users: [] });
-const product = new SimpleJsonStore('./product.json', { productPost: []});
+const store = new SimpleJsonStore('./users.json');
+const product = new SimpleJsonStore('./product.json');
+const service = new SimpleJsonStore('./service.json');
+const transact = new SimpleJsonStore('./transactionHistory.json');
 const expressValidator = require('express-validator')
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -39,40 +42,28 @@ app.use(session({
     }
   }));
   //----------------------------------------
-router.get('/', (req,res) => {
-    let titleModel = req.titleModel;
-    var getID = titleModel.getID;
-    console.log(getID);
-    res.render('productPage.pug', titleModel);
-});
-
-
-router.post('/:id', (req, res) => {
-    let titleModel = req.titleModel;
-    const typ = req.body.tos;
-    const prod = product.get('productPost');
-    const idd = req.params.id;
-    console.log(idd);
-
-    prod.push({
-      
-        categoryName: "Product",
-        userId: idd,
-        productId: prod.length > 0 ? prod[prod.length-1].productId+1 : 1, 
-        productName: req.body.nameofService,
-        description: req.body.description,
-        quantity: req.body.quantity,
-        type: typ,
-        shippingfee: req.body.shippingfee,
-        price: req.body.price
-    });
-    
-    product.set('productPost', prod);
-    req.flash('success',"Product Added Successfully!")
-    res.redirect('/product');
-
-    
-    
+router.use(methodOverride('_method'));
+router.get('/' , (req,res) => {
+  let titleModel = req.titleModel;
+  const trans = transact.get('tHistory');
+  const sers = service.get('servicePost');
+  console.log(titleModel.getID);
+  console.log(trans);
+  const sample = trans.filter(function(transs){
+      return Number(transs.sellerId) === Number(req.titleModel.getID) && transs.categoryName == "Service";
+  });
+  console.log('myPending OrderService')
+  
+  
+  let sampleL=sample.length;
+  console.log(sampleL)
+  const orderList ={
+      samp:titleModel,
+      sample:sample,
+      sampleL: sampleL,
+      sers:sers
+  }  
+  res.render('myPendingOrderService.pug', orderList);
 });
 
 module.exports = router;

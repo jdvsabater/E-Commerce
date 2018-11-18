@@ -72,6 +72,8 @@ router.put('/:id', (req,res) => {
             prod[i].quantity=req.body.prodQuantity;
             prod[i].price=req.body.prodPrice;
             prod[i].type=req.body.prodType;
+            prod[i].shippingfee=req.body.shipFee;
+
         }
     }
 

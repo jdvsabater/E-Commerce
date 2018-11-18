@@ -7,37 +7,36 @@ const flash = require('connect-flash');
 const store = new SimpleJsonStore('./users.json');
 const product = new SimpleJsonStore('./product.json');
 const service = new SimpleJsonStore('./service.json');
+const transact = new SimpleJsonStore('./transactionHistory.json');
 
-router.use(methodOverride('_method'));
 
 
 router.post('/' ,(req, res) => {
-    let titleModel = req.titleModel;
     const stor = store.get('users');
-    var id = req.body.productId;
+    var id = req.body.serviceId;
     var userId = req.body.userId;
-    const products = product.get('productPost');
+    const services = service.get('servicePost');
     
     console.log("GEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEET");
     console.log(id);
-        
-    var orderItem = products.filter(function(prods){
-        return Number(prods.productId) === Number(id);
+    console.log(userId);
+    var servItem = services.filter(function(servs){
+        return Number(servs.serviceId) === Number(id);
     });
     var userSeller = stor.filter(function(seller){
         return Number(seller.id) === Number(userId);
         
     });
    
-    console.log(orderItem[0].userId);
-    console.log('seller id:'+ userSeller[0].id)
+    console.log(servItem[0].userId);
+    console.log(userSeller)
     var itemdetails = {
-        orderItem :orderItem,
-        userSeller: userSeller,
+        servItem :servItem,
+        userSeller: userSeller
     }
 
 
-    res.render('orderProduct.pug', itemdetails);
+    res.render('orderService.pug', itemdetails);
 });
 
 module.exports = router;

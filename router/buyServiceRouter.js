@@ -11,30 +11,30 @@ const service = new SimpleJsonStore('./service.json');
 router.get('/',(req,res) =>{
     let titleModel = req.titleModel;
     const prod = product.get('productPost');
-    const servs = service.get('servicePost');
+    const serv = service.get('servicePost');
     
     console.log(titleModel.getID);
 
     
     const sample = prod.filter(function(prodd){
-        return Number(prodd.userId) !== Number(titleModel.getID) && Number(prodd.quantity) !==0 ;
-    })
-    
-    let sampL = sample.length;
-    const serv= servs.filter(function(servss){
-        return Number(servss.userId) !== Number(titleModel.getID);
+        return Number(prodd.userId) !== Number(titleModel.getID);
     });
-    let servL = serv.length;
-    const buyProdServ ={
+    const sampleS = serv.filter(function(servv){
+        return Number(servv.userId) !== Number(titleModel.getID);
+    });
+    let sampL = sample.length;
+    let sampS = sampleS.length;
+    const buyService ={
         samp:titleModel,
-        serv: serv,
-        prod: prod,
         sample:sample,
         sampL: sampL,
-        servL : servL
+        sampleS: sampleS,
+        sampS: sampS
     }
-    console.log(buyProdServ);
-    res.render('buyProdServ',buyProdServ)
+    console.log(buyService);
+
+    
+    res.render('buyService',buyService )
 });
 
 

@@ -6,41 +6,126 @@ html(lang='en')
     meta(name='description', content='')
     meta(name='author', content='')
     title ECOM
+    
     // Bootstrap core CSS
-    link(href='assets/bootstrap/css/bootstrap.min.css', rel='stylesheet')
-    // Custom styles for this template
-    link(href='css/starter-template.css', rel='stylesheet')
+    link(href='vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    link(href='assets/bootstrap/css/bootstrap.css', rel='stylesheet')
+    link(href='dataTables.bootstrap4.min.css', rel='stylesheet')
+    
+    script(src='table.js' type="text/javascript")
+    script(src='assets/bootstrap/js/bootstrap.min.js')
+    
+    script(src='assets/js/jquery-1.11.1.min.js' )
+
+    //link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css', rel='stylesheet')
+    //script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    //script(src='//code.jquery.com/jquery-1.11.1.min.js')
+
+    script(src='design.js')
+    
+    
+      
+    link(href='design.css', rel='stylesheet')
+
+  // ---- Include the above in your HEAD tag --------
   body
-    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
-      a.navbar-brand(href='/home') ECOM
-      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarsExampleDefault.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/service')
-              | Add Services 
-              span.sr-only (current)
-          li.nav-item.active
-            a.nav-link(href='/product')
-              | Add Products 
-              span.sr-only (current)
-          li.nav-item.active
-            a.nav-link(href='/myProdServ')
-              | My Products & Services 
-              span.sr-only (current)
-          li.nav-item.active
-            a.nav-link(href='/buyProdServ')
-              | Buy Products & Services 
-              span.sr-only (current)
-          li.nav-item.active
-            a.nav-link(href='/myOrderList')
+    .wrap
+      nav.nav-bar.navbar-inverse(role='navigation')
+        #top-menu.container-fluid.active
+          a.navbar-brand(href='/home  ') Lexus E-Commerce
+          ul.nav.navbar-nav
+            li.dropdown.movable
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                span.caret
+                span.fa.fa-4x.fa-child
+              ul.dropdown-menu(role='menu')
+                li
+                  a(href='#')
+                    span.fa.fa-user
+                    | My Profile
+                li
+                  a(href='#')
+                    span.fa.fa-gear
+                    | Settings
+                li.divider
+                li
+                  a(href='#')
+                    span.fa.fa-power-off
+                    | Logout
+      aside#side-menu.aside(role='navigation')
+        ul.nav.nav-list.accordion
+          li.nav-header
+            .link
+              i.glyphicon.glyphicon-plus 
+              | Add Products or Services 
+              span.glyphicon.glyphicon-menu-down
+            ul.submenu
+              li
+                a(href='/product') Add Product
+              li
+                a(href='/service') Add Service
+              
+          li.nav-header
+            .link
+              i.glyphicon.glyphicon-gift
+              | Buy Products or Services 
+              span.glyphicon.glyphicon-menu-down
+            ul.submenu
+              li
+                a(href='/buyProdServ') Buy Products
+              li
+                a(href='/buyService') Buy Services
+                                  
+          li.nav-header
+            .link
+              i.glyphicon.glyphicon-shopping-cart
               | My Order List 
-              span.sr-only (current)
-       
-    main.container(role='main')
-      != messages('message', locals)
-      block content
+              span.glyphicon.glyphicon-menu-down
+            ul.submenu
+              li
+                a(href='/myOrderList') My Product Order List
+              li
+                a(href='/myServiceOrderList') My Service Order List
+                    
+          li.nav-header
+            .link
+              i.glyphicon.glyphicon-tasks
+              | My Products And Services 
+              span.glyphicon.glyphicon-menu-down
+            ul.submenu
+              li
+                a(href='/myProdServ') My Products
+              li
+                a(href='myServ') My Services
+                    
+          li.nav-header
+            .link
+              i.glyphicon.glyphicon-hourglass
+              | My Pending Orders 
+              span.glyphicon.glyphicon-menu-down
+            ul.submenu
+              li
+                a(href='/myPendingOrderService') Pending Services Orders
+              li
+                a(href='/myPendingOrderProduct') Pending Products Orders
+
+                
+          
+          
+      // Body content
+      .content
+        div
+          a.side-menu-link.burger(href='#menu')
+            span#bgrOne.burger_inside
+            span#bgrTwo.burger_inside
+            span#bgrThree.burger_inside
+        section.content-inner
+          != messages('message', locals)
+          block content
+          
+          
+    
+    
       
         
     //
@@ -49,8 +134,12 @@ html(lang='en')
       ==================================================
     // Placed at the end of the document so the pages load faster
     script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    script(src='//code.jquery.com/jquery-1.11.1.min.js')
+    script(src='vendor/jquery/jquery.min.js')
+    script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
     script.
       window.jQuery || document.write('<script src="/vendor/jquery-slim.min.js"><\\/script>')
     script(src='vendor/popper.min.js')
-    script(src='assets/bootstrap/js/bootstrap.min.js')
     script(src='assets/js/scripts.js')
+    
+

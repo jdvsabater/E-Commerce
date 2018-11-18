@@ -76,7 +76,7 @@ router.put('/:id', (req,res) => {
     console.log(serv);
     service.set('servicePost', serv);
     req.flash('success',"Service Updated Succesfully!")
-    res.redirect('/myProdServ');
+    res.redirect('/myServ');
 });
 
 

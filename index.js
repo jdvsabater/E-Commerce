@@ -8,6 +8,7 @@ const axios = require('axios');
 const dateTime = require('node-datetime');
 const dt = dateTime.create();
 global.dateTime = dt.format('Y-m-d H:M:S');
+//--------------------------routers-------------------------
 const session =require('express-session');
 const indexRouter = require('./router/indexRouter');
 const registerRouter = require('./router/registerRouter');
@@ -15,17 +16,29 @@ const loginRouter = require('./router/loginRouter');
 const serviceRouter = require('./router/serviceRouter');
 const productRouter = require('./router/productRouter');
 const myProdServRouter = require('./router/myProdServRouter');
+const myServRouter = require('./router/myServRouter');
 const deleteRouter = require('./router/deleteRouter');
 const editProductRouter = require('./router/editProductRouter');
 const editServiceRouter = require('./router/editServiceRouter');
 const buyProdServ = require('./router/buyProdServRouter');
+const buyServiceRouter = require('./router/buyServiceRouter');
 const orderProdRouter = require('./router/orderProdRouter');
+const orderServRouter = require('./router/orderServiceRouter');
+const myPendingOrderProductRouter = require('./router/myPendingOrderProductRouter');
+const myPendingOrderServiceRouter = require('./router/myPendingOrderServiceRouter');
+const statusPendingProductRouter = require('./router/statusPendingProductRouter');
 const orderTransactionRouter = require('./router/orderTransactionRouter');
+const orderServiceTransactionRouter = require('./router/orderServiceTransactionRouter');
+const statusReceivedRouter = require('./router/statusReceivedRouter');
 const myOrderListRouter = require('./router/myOrderListRouter');
-const SimpleJsonStore = require('simple-json-store');
-const store = new SimpleJsonStore('./users.json');
-const expressValidator = require('express-validator')
+const myServiceOrderListRouter = require('./router/myServiceOrderListRouter');
+const cancelOrderRouter = require('./router/cancelOrderRouter');
+const statusConfirmedServiceRouter = require('./router/statusConfirmedServiceRouter');
 
+//---------------------------------------------------------
+const SimpleJsonStore = require('simple-json-store');
+const store = new SimpleJsonStore('./users.json',{users:[]});
+const expressValidator = require('express-validator')
 const flash = require('connect-flash');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -80,17 +93,19 @@ app.post('/', function(req, res) {
             getid = users[i].id;
             console.log(getid);
             console.log('success login');
-            check ='homepage.pug'
+            check ='homepage.pug';
             
            
-            
+            break;
         }else{
             console.log('Incorrect user or pw');
             
         }
         
     }
-    
+    if(check == 'login.pug'){
+      req.flash('danger',"Username or Password is Incorrect!");
+    }
     res.render(check, titleModel);
 
 
@@ -103,13 +118,24 @@ app.use('/register',registerRouter);
 app.use('/service', serviceRouter);
 app.use('/product', productRouter);
 app.use('/myProdServ',myProdServRouter);
+app.use('/myServ',myServRouter);
 app.use('/updateProd',editProductRouter);
 app.use('/updateServ',editServiceRouter);
 app.use('/delete',deleteRouter);
 app.use('/buyProdServ', buyProdServ);
+app.use('/buyService', buyServiceRouter);
 app.use('/orderProduct', orderProdRouter);
+app.use('/orderService', orderServRouter);
+app.use('/myPendingOrderProduct', myPendingOrderProductRouter);
+app.use('/myPendingOrderService', myPendingOrderServiceRouter);
+app.use('/statusPendingProduct', statusPendingProductRouter);
+app.use('/statusReceived', statusReceivedRouter);
 app.use('/orderTransaction', orderTransactionRouter);
+app.use('/orderServiceTransaction', orderServiceTransactionRouter);
 app.use('/myOrderList', myOrderListRouter);
+app.use('/myServiceOrderList', myServiceOrderListRouter);
+app.use('/statusConfirmedService', statusConfirmedServiceRouter);
+app.use('/cancelOrder', cancelOrderRouter);
 
 app.listen(port,(err) =>{
 	if(err){

@@ -55,12 +55,15 @@ router.post('/:id', (req, res) => {
     console.log(idd);
    
     sers.push({
+        
+        categoryName: "Service",
         userId: idd,
         serviceId: sers.length > 0 ? sers[sers.length-1].serviceId +1: 1, 
-        service: req.body.nameofService,
+        serviceName: req.body.nameofService,
         description: req.body.description,
         type: typ,
-        price: req.body.price
+        price: req.body.price,
+        mobilenumber: req.body.mobilenumber
     });
     
     service.set('servicePost', sers);

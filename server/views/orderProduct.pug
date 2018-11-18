@@ -30,7 +30,10 @@ block content
                     input.hidden(type="hidden" value=orderItem[0].quantity name='quantity')
                     input.hidden(type="hidden" value=orderItem[0].price name='price')    
                     input.hidden(type="hidden" value=orderItem[0].price name='shippingfee')    
-                    input.hidden(type="hidden" value=userSeller[0].firstName + " " + userSeller[0].lastName name='sellerName')    
+                    input.hidden(type="hidden" value=userSeller[0].firstName + " " + userSeller[0].lastName name='sellerName')
+                    input.hidden(type="hidden" value=userSeller[0].id name='sellerId')
+                      
+                    
                 .form-group
                     button.btn.btn-primary(type="submit") Buy Now
                     
