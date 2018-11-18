@@ -16,7 +16,8 @@ var formatted = dt.format('Y-m-d H:M:S');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: "hello",
-    resave: true
+    resave: true,
+    saveUninitialized: false
   }));
   app.use(require('connect-flash')());
   app.use(function(req, res, next){

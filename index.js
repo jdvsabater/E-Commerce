@@ -33,17 +33,22 @@ const statusReceivedRouter = require('./router/statusReceivedRouter');
 const myOrderListRouter = require('./router/myOrderListRouter');
 const myServiceOrderListRouter = require('./router/myServiceOrderListRouter');
 const cancelOrderRouter = require('./router/cancelOrderRouter');
+const userProfileRouter = require('./router/userProfileRouter');
+const logout = require('./router/logout');
 const statusConfirmedServiceRouter = require('./router/statusConfirmedServiceRouter');
 
 //---------------------------------------------------------
 const SimpleJsonStore = require('simple-json-store');
 const store = new SimpleJsonStore('./users.json',{users:[]});
+const prod = new SimpleJsonStore('./service.json',{productPost:[]});
+const serv = new SimpleJsonStore('./product.json',{servicePosst:[]});
 const expressValidator = require('express-validator')
 const flash = require('connect-flash');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 var getid = [];
+let nem = require('nem-sdk').default;
 app.use((req, res, next) => {
 	req.titleModel = {
         title: 'ECOM',
@@ -56,7 +61,8 @@ app.use((req, res, next) => {
 //------------validate
 app.use(session({
     secret: "hello",
-    resave: true
+    resave: true,
+    saveUninitialized: false
   }))
   app.use(require('connect-flash')());
   app.use(function(req, res, next){
@@ -84,18 +90,34 @@ app.set('views', path.join(__dirname, 'server/views'));
 app.set('view engine', 'pug');
   //----------------------------------------
 app.post('/', function(req, res) {
+    /*let a =
+    {  payload: '68656c6c6f', type: 1 }
+    var fmt = nem.utils.format.hexMessage(a)
+    console.log(fmt);
+  */
+// let endpoint = nem.model.objects.create('endpoint')(nem.model.nodes.defaultTestnet, nem.model.nodes.defaultPort);
     let titleModel = req.titleModel;
     const users = store.get('users');
-    var check ='login.pug';
+    var check ='/';
+    var dataNem=[];
+    
     for(var i = 0; i < users.length; i++) {
         if(req.body.usernameL == users[i].username && req.body.passwordL == users[i].password){
             //ung value getid ung mappunta sa var n dneclare sa taas
             getid = users[i].id;
             console.log(getid);
             console.log('success login');
-            check ='homepage.pug';
-            
-           
+            check ='/home';
+            //gets transaction hash
+            /*nem.com.requests.transaction.byHash(endpoint,'3f83b4988efee49267ff1531d0c53b9e0cc27a0769367e95d2b934c0635a92ba').then(function(res) {
+              dataNem = res.data;
+              
+              console.log(dataNem);
+              
+            }, function(err) {
+              console.error(err)
+            })
+            console.log(dataNem)*/
             break;
         }else{
             console.log('Incorrect user or pw');
@@ -103,14 +125,13 @@ app.post('/', function(req, res) {
         }
         
     }
-    if(check == 'login.pug'){
+    if(check == '/'){
       req.flash('danger',"Username or Password is Incorrect!");
     }
-    res.render(check, titleModel);
+    res.redirect(check);
 
 
 });
-
 
 app.use('/',indexRouter);
 app.use('/login',loginRouter);
@@ -136,6 +157,8 @@ app.use('/myOrderList', myOrderListRouter);
 app.use('/myServiceOrderList', myServiceOrderListRouter);
 app.use('/statusConfirmedService', statusConfirmedServiceRouter);
 app.use('/cancelOrder', cancelOrderRouter);
+app.use('/userProfile', userProfileRouter);
+app.use('/logout', logout);
 
 app.listen(port,(err) =>{
 	if(err){

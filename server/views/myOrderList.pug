@@ -5,20 +5,21 @@ block content
     else
         h1 Product Order List
         div(class="container")
-        table.table
-            tr
-         
-                th Name
-                th Description
-                th Quantity
-                th Status
-                th Seller
-                th Price
-                th Shipping Fee
-                th 
+        table(id='example' class='table table-hover' style='width:100%')
+            thead
+                tr
+                    th Name
+                    th Description
+                    th Quantity
+                    th Status
+                    th Seller
+                    th Price
+                    th Shipping Fee
+                    th 
+                
+            tbody
                 each val, index in sample
                     tr 
-                        
                         td=sample[index].name
                         td=sample[index].description
                         td=sample[index].quantity

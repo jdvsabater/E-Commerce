@@ -5,17 +5,20 @@ block content
     else
         h1 Product Order List
         div(class="container")
-        table.table
-            tr
-         
-                th Name
-                th Description
-                th Quantity
-                th Status
-                th Buyer
-                th Price
-                th Shipping Fee
+        table(id='example' class='table table-hover' style='width:100%')
+            thead
+                tr
+            
+                    th Name
+                    th Description
+                    th Quantity
+                    th Status
+                    th Buyer
+                    th Price
+                    th Shipping Fee
+                    th 
                 
+            tbody
                 each val, index in sample
                     tr 
                         
@@ -39,4 +42,3 @@ block content
                                     input.hidden(type="hidden" value=sample[index].productId name='productId')
                                     input.hidden(type="hidden" value=sample[index].quantity name='quantity')
                                     button.btn.btn-primary(role='button' type='submit') Deliver
-    

@@ -17,7 +17,8 @@ var formatted = dt.format('Y-m-d H:M:S');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: "hello",
-    resave: true
+    resave: true,
+    saveUninitialized: false
   }));
   app.use(require('connect-flash')());
   app.use(function(req, res, next){
@@ -48,10 +49,16 @@ router.get('/', function getIndexPage(req, res) {
 	res.render('login.pug',titleModel);
 });
 router.get('/home', function getIndexPage(req, res) {
+  if(req.titleModel.getID == ''){
+    req.flash('danger', "Login First!");
+    res.redirect('/');
+}else{
+
 	let titleModel = req.titleModel;
 	console.log('home route');
 	console.log(titleModel);
-	res.render('homepage.pug',titleModel);
+  res.render('homepage.pug',titleModel);
+}
 });
 
 

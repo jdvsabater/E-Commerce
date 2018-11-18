@@ -18,7 +18,7 @@ const transact = new SimpleJsonStore('./transactionHistory.json');
 
 
 router.post('/',(req,res) =>{
-   
+    
     const prod = product.get('productPost');
     const serv = service.get('servicePost');
     const trans = transact.get('tHistory');

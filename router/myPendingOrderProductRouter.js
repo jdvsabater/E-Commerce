@@ -7,6 +7,10 @@ const transact = new SimpleJsonStore('./transactionHistory.json');
 
 
 router.get('/',(req,res) =>{
+    if(req.titleModel.getID == ''){
+        req.flash('danger', "Login First!");
+        res.redirect('/');
+    }else{
     let titleModel = req.titleModel;
     const trans = transact.get('tHistory');
     console.log(titleModel.getID);
@@ -24,6 +28,7 @@ router.get('/',(req,res) =>{
         sampleL: sampleL
     }
     res.render('myPendingOrderProduct.pug',orderList )
+}
 });
 
 module.exports = router;

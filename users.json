@@ -2,13 +2,13 @@
 	"users": [
 		{
 			"id": 1,
-			"firstName": "qwe",
-			"lastName": "qwe",
+			"firstName": "Brandolf",
+			"lastName": "Hitlur",
 			"email": "qwe",
 			"number": "09123123",
 			"username": "qwe",
 			"password": "qwe",
-			"address": "qwe"
+			"address": "Sampalayan"
 		},
 		{
 			"id": 2,
@@ -69,6 +69,37 @@
 			"username": "joshua",
 			"password": "sabater",
 			"address": "asdadasd"
+		},
+		{
+			"id": 8,
+			"username": "jon",
+			"password": "jon",
+			"nemaddress": "TAUIE2QCCRZ6VRFOA5N253DL5SKSLPWN3FGMC3KA",
+			"transactionHash": "e125374fe1bf59da941fb2a282da6075172b7574c2274a274341005bdbaf1fef"
+		},
+		{
+			"id": 9,
+			"username": "law",
+			"password": "law",
+			"nemaddress": "TBBC6C3AU5PA6H63KWIC24W6V6EIGJWIRQG4APM3",
+			"transactionHash": "d523ab0385a2cc5ebe1a921762b62b68d7857e2b3038f0b5c1ce4a48c748025f"
+		},
+		{
+			"id": 10,
+			"username": "hello",
+			"password": "hello",
+			"nemaddress": "TCQ5F2SRKI7M6PNWN5J5ZBMSMWQ6P4OT52DIT6AN",
+			"transactionHash": "14647e131a5e85d021dc8e962ce9ce40053c60c9c4ca8a8435b58367140edfdf"
+		},
+		{
+			"id": 11,
+			"firstName": "asdad",
+			"lastName": "asdas",
+			"email": "asdasda",
+			"number": "1231",
+			"username": "123",
+			"password": "1231",
+			"address": "123"
 		}
 	]
 }

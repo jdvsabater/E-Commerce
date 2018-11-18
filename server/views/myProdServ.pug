@@ -4,19 +4,23 @@ block content
     div(class="container")
     
     if prodL == 0
-        h4 No Products posted yet
+        h1 No Products posted yet
     else
         h1 My Products
-        table.table
-            tr
-                th Name
-                th Description
-                th Product Type
-                th Product Price
-                th Quantity Available
-                th Shipping Fee
-                th(colspan='2') Action
-                each val, index in prod
+        table(id='example' class='table table-hover' style='width:100%')
+            thead
+                tr
+                    th Name
+                    th Description
+                    th Product Type
+                    th Product Price
+                    th Quantity Available
+                    th Shipping Fee
+                    th(colspan="2") Action
+                    
+                    
+            tbody  
+                each val, index in prod     
                     tr
                         td= prod[index].productName 
                         td= prod[index].description 
@@ -32,4 +36,4 @@ block content
                             form(action='/updateProd' method='post')
                                 input.hidden(type="hidden" value=prod[index].productId name='productId')
                                 button.btn(role='button' type='submit') Edit
-    
+        

@@ -5,15 +5,17 @@ block content
     else
         h1 Service Order List
         div(class="container")
-        table.table
-            tr
-            
-                th Name
-                th Description
-                th Status
-                th Seller
-                th Price
+        table(id='example' class='table table-hover' style='width:100%')
+            thead
+                tr
                 
+                    th Name
+                    th Description
+                    th Status
+                    th Seller
+                    th Price
+            
+            tbody
                 each val, index in sample
                     tr  
         

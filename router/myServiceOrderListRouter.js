@@ -8,6 +8,10 @@ const service = new SimpleJsonStore('./service.json');
 
 
 router.get('/',(req,res) =>{
+    if(req.titleModel.getID == ''){
+        req.flash('danger', "Login First!");
+        res.redirect('/');
+    }else{
     let titleModel = req.titleModel;
     const trans = transact.get('tHistory');
     const sers = service.get('servicePost');
@@ -27,6 +31,7 @@ router.get('/',(req,res) =>{
         sers: sers
     }
     res.render('myServiceOrderList.pug',orderList )
+}
 });
 
 

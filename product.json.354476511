@@ -1,5 +1,4 @@
 {
-	"servicePosst": [],
 	"productPost": [
 		{
 			"categoryName": "Product",
@@ -122,5 +121,6 @@
 			"shippingfee": "12",
 			"price": "12"
 		}
-	]
+	],
+	"servicePosst": []
 }

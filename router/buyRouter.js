@@ -11,6 +11,12 @@ const service = new SimpleJsonStore('./service.json');
 router.use(methodOverride('_method'));
 
 router.delete('/prod/:id', (req,res) => {
+    if(req.titleModel.getID == []){
+        req.flash('danger', "Login First!");
+        res.redirect('/login');
+
+    }else{
+
     const id = req.params.id;
     const products = product.get('productPost');
 
@@ -24,6 +30,7 @@ router.delete('/prod/:id', (req,res) => {
         product.set('productPost', newProducts);
         req.flash('Success', "Product has been bought");
         res.redirect('/buyProdServ');
+    }
 });
 
 

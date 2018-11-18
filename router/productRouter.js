@@ -16,7 +16,8 @@ var formatted = dt.format('Y-m-d H:M:S');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: "hello",
-    resave: true
+    resave: true,
+    saveUninitialized: false
   }));
   app.use(require('connect-flash')());
   app.use(function(req, res, next){
@@ -40,10 +41,15 @@ app.use(session({
   }));
   //----------------------------------------
 router.get('/', (req,res) => {
+  if(req.titleModel.getID == ''){
+    req.flash('danger', "Login First!");
+    res.redirect('/');
+}else{
     let titleModel = req.titleModel;
     var getID = titleModel.getID;
     console.log(getID);
     res.render('productPage.pug', titleModel);
+}
 });
 
 

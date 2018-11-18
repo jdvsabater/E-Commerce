@@ -9,6 +9,11 @@ const product = new SimpleJsonStore('./product.json');
 const service = new SimpleJsonStore('./service.json');
 
 router.get('/',(req,res) =>{
+    if(req.titleModel.getID == ''){
+        req.flash('danger', "Login First!");
+        res.redirect('/');
+    }else{
+
     let titleModel = req.titleModel;
     const prod = product.get('productPost');
     const serv = service.get('servicePost');
@@ -35,6 +40,7 @@ router.get('/',(req,res) =>{
 
     
     res.render('buyService',buyService )
+    }
 });
 
 
