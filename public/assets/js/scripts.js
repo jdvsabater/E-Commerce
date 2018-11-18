@@ -1,9 +1,10 @@
+
 $('[name=price]').keypress(function(e){ 
     if (this.value.length == 0 && e.which == 48 ){
        return false;
     }
  });
-
+ 
  $('[name=quantity]').keypress(function(e){ 
     if (this.value.length == 0 && e.which == 48 ){
        return false;
