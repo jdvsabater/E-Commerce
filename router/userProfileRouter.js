@@ -109,16 +109,12 @@ router.post('/', (req,res) => {
       let titleModel = req.titleModel;
       const users = store.get('users');
       var getID = titleModel.getID;
-      let firstName = req.body.firstName;
-      let lastName = req.body.lastName;
-   
+
       let number = req.body.number;
       let password = req.body.password;
       let address = req.body.address;
       for(let i = 0;i < users.length ; i++ ){
         if(Number(users[i].id) == Number(getID) )  {
-            users[i].firstName = firstName;
-            users[i].lastName = lastName;
             users[i].number = number;
             users[i].password = password;
             users[i].address = address;
